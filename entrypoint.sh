@@ -9,7 +9,7 @@ DEBUG_MODE="debug"
 QEMU_MODE="qemu"
 TEST_MODE="test"
 
-ZEPHYR_WORKSPACE=/zephyr-workdir
+ZEPHYR_WORKSPACE=/zephyr-project
 CACHE_DIR=/cache
 APP_DIR=$ZEPHYR_WORKSPACE/app
 PROJ_CONFIG=$APP_DIR/prj.conf
