@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ 'main' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        zephyr: [2.7.0]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker login
+      run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+    - name: Docker build
+      run: |
+        docker build . --file Dockerfile --build-arg ZEPHYR_CACHE=${{ matrix.zephyr }} --tag judebake/electronya-firm-builder:${{ matrix.zephyr }}
+        docker push judebake/electronya-firm-builder:${{ matrix.zephyr }}
