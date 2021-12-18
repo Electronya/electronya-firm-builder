@@ -4,17 +4,18 @@ FROM zephyrprojectrtos/ci:latest
 ARG ZEPHYR_CACHE=2.7.0
 
 # Setup zephyr workspace
-RUN west init /zephyr-project
-RUN cd /zephyr-project && west update && west zephyr-export
-RUN pip3 install --user -r /zephyr-project/zephyr/scripts/requirements.txt
+RUN west init /zephyr-workdir
+RUN cd /zephyr-workdir && west update && west zephyr-export
+RUN pip3 install --user -r /zephyr-workdir/zephyr/scripts/requirements.txt
 
 # Overright west config
-COPY .west/* /zephyr-project/.west/
-ADD app-v${ZEPHYR_CACHE} /zephyr-project/app
-RUN cd /zephyr-project && west update
-RUN rm -rf /zephyr-project/app
+COPY .west/* /zephyr-workdir/.west/
+ADD app-v${ZEPHYR_CACHE} /zephyr-workdir/app
+RUN cd /zephyr-workdir && west update
+RUN rm -rf /zephyr-workdir/app
 
 # Setup input and output volumes
-RUN mkdir /builds
-RUN mkdir /cache
-VOLUME [ "/builds", "/cache" ]
+VOLUME [ "/zephyr-workdir" ]
+
+# Setting working directory
+WORKDIR /zephyr-workdir
