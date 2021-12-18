@@ -14,9 +14,9 @@ ADD app-v${ZEPHYR_CACHE} /zephyr-workdir/app
 RUN cd /zephyr-workdir && west update
 RUN rm -rf /zephyr-workdir/app
 
-# Setup entrypoint
-COPY entrypoint.sh /zephyr-workdir/entrypoint.sh
-ENTRYPOINT [ "entrypoint.sh" ]
-
 # Setting working directory
 WORKDIR /zephyr-workdir
+
+# Setup entrypoint
+COPY entrypoint.sh /zephyr-workdir/entrypoint.sh
+ENTRYPOINT [ "./entrypoint.sh" ]

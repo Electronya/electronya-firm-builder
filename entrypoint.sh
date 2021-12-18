@@ -73,13 +73,13 @@ function buildFirmware {
 }
 
 function moveBuildArtefacts {
-  # TODO: Name the target artefact base on the firmware name and version (firmware_info.h)
+  # TODO: Name the target artefact base on the firmware name and version (appInfo.h)
   cp -r $BUILD_ARTEFACT $GITHUB_WORKSPACE/ || return 1
   return 0
 }
 
 function moveTestArtefacts {
-  # TODO: Name the target artefact base on the firmware name and version (firmware_info.h)
+  # TODO: Name the target artefact base on the firmware name and version (appInfo.h)
   cp -r $TEST_ARTEFACT $GITHUB_WORKSPACE/ || return 1
   return 0
 }
