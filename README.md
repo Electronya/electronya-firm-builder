@@ -8,5 +8,6 @@ To build the image, simply use the following commands:
 ```
 git clone git@github.com:Electronya/electronya-firm-builder.git
 cd electronya-firm-builder
-docker build TODO: indicate the ARG for zephyr caching
+docker build --build-arg ZEPHYR_CACHE=<version-to-cache>
 ```
+Where ```version-to-cache``` is the version of zephyr to be cached in the image.
