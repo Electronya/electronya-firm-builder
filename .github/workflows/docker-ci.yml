@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        zephyr: ["2.7.0"]
+        zephyr: [2.7.0]
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --build-arg ZEPHYR_CACHE=$${{ matrix.zephyr }} --tag electronya-firm-builder:${{ matrix.zephyr }}
+      run: docker build . --file Dockerfile --build-arg ZEPHYR_CACHE=${{ matrix.zephyr }} --tag electronya-firm-builder:${{ matrix.zephyr }}
