@@ -6,6 +6,7 @@ ARG ZEPHYR_CACHE=2.7.0
 # Setup zephyr workspace
 RUN west init /zephyr-workdir
 RUN cd /zephyr-workdir && west update && west zephyr-export
+RUN pip3 install --user -r /zephyr-workdir/zephyr/scripts/requirements.txt
 
 # Overright west config
 COPY .west/* /zephyr-workdir/.west/
