@@ -9,6 +9,7 @@ RUN cd /zephyr-workdir && west update && west zephyr-export
 
 # Overright west config
 COPY .west/* /zephyr-workdir/.west/
+RUN echo "caching zephyr v${ZEPHYR_CACHE}"
 ADD app-v${ZEPHYR_CACHE} /zephyr-workdir/app
 RUN cd /zephyr-workdir && west update
 RUN rm -rf /zephyr-workdir/app
