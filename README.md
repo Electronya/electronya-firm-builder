@@ -10,4 +10,25 @@ git clone git@github.com:Electronya/electronya-firm-builder.git
 cd electronya-firm-builder
 docker build --build-arg ZEPHYR_CACHE=<version-to-cache>
 ```
-Where ```version-to-cache``` is the version of zephyr to be cached in the image.
+Where:
+  - ```<version-to-cache>``` is the version of zephyr to be cached in the image.
+
+## Usage
+To build firmware, use the following command from the root of the firmware to build:
+```
+docker run --name firmware-builder --rm -it \
+  --privileged -v /dev/bus/usb:/dev/bus/usb \
+  -v "${PWD}:/github/workspace" \
+  -e "BUILD_MODE=<build-mode>" \
+  judebake/electronya-firm-builder:<zephyr-version>
+```
+Where:
+  - ```<build-mode>``` is one of the following build mode:
+    - ```config```: run the configuration tool (currently configuration is not saved).
+    - ```prod```: build the firmware in production mode (logger level = info).
+    - ```dev```: build, flash, and run the firmware in development mode (logger level = debug).
+    - ```debug```: build, flash the firmware (logger level = debug), and launch gdb for debugging.
+    - ```qemu```: build and run the firmware in emulation mode (no hardware is emulated).
+    - ```test```: run the firmware unit test cases (in emulation mode).
+  - ```<zephyr-version>```: is the version of zephyr to build against. Currently supported version:
+    - 2.7.0
