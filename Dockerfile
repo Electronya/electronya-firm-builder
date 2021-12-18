@@ -9,7 +9,7 @@ ENV ZEPHYR_WORKDIR=zephyr-project
 # Setup zephyr workspace
 RUN west init /$ZEPHYR_WORKDIR
 RUN cd /$ZEPHYR_WORKDIR && west update && west zephyr-export
-RUN pip3 install --user -r ~/zephyrproject/zephyr/scripts/requirements.txt
+RUN pip3 install --user -r /$ZEPHYR_WORKDIR/zephyr/scripts/requirements.txt
 
 # Overright west config
 COPY .west/* /$ZEPHYR_WORKDIR/.west/
