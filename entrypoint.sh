@@ -91,7 +91,6 @@ validateBuildMode
 # Export variables
 # export ZEPHYR_BASE=/zephyr-project/zephyr
 export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
-export ZEPHYR_TOOLCHAIN_PATH=/opt/toolchains/zephyr-sdk-0.13.2
 
 # Setup the workspace
 greenPrint "Setting up the Zephyr workspace..."
