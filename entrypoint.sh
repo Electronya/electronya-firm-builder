@@ -90,6 +90,9 @@ then
   exitError "ERROR: No build mode have been provided."
 fi
 
+# Printing user
+redPrint $(whoami)
+
 # Validate build mode
 validateBuildMode
 
