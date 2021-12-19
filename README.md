@@ -19,8 +19,7 @@ To build firmware, use the following command from the root of the firmware to bu
 docker run --name firmware-builder --rm -it \
   --privileged -v /dev/bus/usb:/dev/bus/usb \
   -v "${PWD}:/github/workspace" \
-  -e "BUILD_MODE=<build-mode>" \
-  judebake/electronya-firm-builder:<zephyr-version>
+  judebake/electronya-firm-builder:<zephyr-version> <build-mode>
 ```
 Where:
   - ```<build-mode>``` is one of the following build mode:

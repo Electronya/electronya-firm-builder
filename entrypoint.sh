@@ -16,6 +16,8 @@ TEST_ARTEFACT=./twister-out
 
 GITHUB_WORKSPACE=/github/workspace/
 
+BUILD_MODE=$1
+
 function redPrint {
   if [[ "$1" != "" ]]
   then

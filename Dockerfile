@@ -25,3 +25,4 @@ WORKDIR /$ZEPHYR_WORKDIR
 # Setup entrypoint
 COPY entrypoint.sh /$ZEPHYR_WORKDIR/entrypoint.sh
 ENTRYPOINT [ "./entrypoint.sh" ]
+CMD ["prod"]
