@@ -2,4 +2,4 @@
 path = app
 file = west.yml
 [zephyr]
-base = zephir
+base = zephyr
