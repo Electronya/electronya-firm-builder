@@ -4,11 +4,11 @@ FROM zephyrprojectrtos/ci:latest
 ARG ZEPHYR_CACHE=2.7.0
 
 # ENV Variable
-ENV ZEPHYR_WORKDIR=/zephyr-project
+ENV ZEPHYR_WORKDIR=zephyr-project
 
 # Setup zephyr workspace
 RUN west init $ZEPHYR_WORKDIR
-RUN cd$ZEPHYR_WORKDIR && west update && west zephyr-export
+RUN cd $ZEPHYR_WORKDIR && west update && west zephyr-export
 RUN cp -rf /home/user/.cmake/packages/Zephyr-sdk /root/.cmake/packages/Zephyr-sdk
 RUN pip3 install --user -r $ZEPHYR_WORKDIR/zephyr/scripts/requirements.txt
 
