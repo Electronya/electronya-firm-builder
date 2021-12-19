@@ -56,6 +56,7 @@ function setupWorkspace {
   greenPrint "Copying source code..."
   cp -r $GITHUB_WORKSPACE $APP_DIR
   greenPrint "Updating the workspace..."
+  cd $ZEPHYR_WORKDIR
   west update
   return $?
 }
