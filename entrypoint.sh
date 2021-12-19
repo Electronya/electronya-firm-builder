@@ -9,12 +9,10 @@ DEBUG_MODE="debug"
 QEMU_MODE="qemu"
 TEST_MODE="test"
 
-ZEPHYR_WORKSPACE=/zephyr-project
-CACHE_DIR=/cache
-APP_DIR=$ZEPHYR_WORKSPACE/app
+APP_DIR=./app
 PROJ_CONFIG=$APP_DIR/prj.conf
-BUILD_ARTEFACT=$ZEPHYR_WORKSPACE/build
-TEST_ARTEFACT=$ZEPHYR_WORKSPACE/twister-out
+BUILD_ARTEFACT=./build
+TEST_ARTEFACT=./twister-out
 
 GITHUB_WORKSPACE=/github/workspace/
 
@@ -54,7 +52,6 @@ function validateBuildMode {
 function setupWorkspace {
   greenPrint "Copying source code..."
   cp -r $GITHUB_WORKSPACE $APP_DIR
-  cd $ZEPHYR_WORKSPACE
   greenPrint "Updating the workspace..."
   west update
   return $?
@@ -65,7 +62,6 @@ function buildFirmware {
   then
     BUILD_ENV=$1
     greenPrint "Building firmware in ${BUILD_ENV} environment..."
-    cd /zephyr-project
     west build ./app -- -DBUILD_ENV=${BUILD_ENV} || exitError "ERROR: Unable to build the firmware."
   else
     exitError "ERROR: ${BUILD_ENV} is not a supported build environment."
@@ -95,6 +91,7 @@ validateBuildMode
 # Export variables
 # export ZEPHYR_BASE=/zephyr-project/zephyr
 export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+export ZEPHYR_TOOLCHAIN_PATH=/opt/toolchains/zephyr-sdk-0.13.2
 
 # Setup the workspace
 greenPrint "Setting up the Zephyr workspace..."
