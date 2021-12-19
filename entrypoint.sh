@@ -158,6 +158,8 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
+  redPrint $(ls /root/.cmake/packages)
+  cd $ZEPHYR_WORKDIR
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
