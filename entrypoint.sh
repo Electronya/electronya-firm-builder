@@ -90,9 +90,6 @@ then
   exitError "ERROR: No build mode have been provided."
 fi
 
-# Printing user
-redPrint $(whoami)
-
 # Validate build mode
 validateBuildMode
 
@@ -158,8 +155,6 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  redPrint $(ls /root/.cmake/packages)
-  cd $ZEPHYR_WORKDIR
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
