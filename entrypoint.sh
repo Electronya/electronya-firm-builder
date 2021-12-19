@@ -9,10 +9,11 @@ DEBUG_MODE="debug"
 QEMU_MODE="qemu"
 TEST_MODE="test"
 
-APP_DIR=./app
+ZEPHYR_WORKDIR=/zephyr-project
+APP_DIR=$ZEPHYR_WORKDIR/app
 PROJ_CONFIG=$APP_DIR/prj.conf
-BUILD_ARTEFACT=./build
-TEST_ARTEFACT=./twister-out
+BUILD_ARTEFACT=$ZEPHYR_WORKDIR/build
+TEST_ARTEFACT=$ZEPHYR_WORKDIR/twister-out
 
 GITHUB_WORKSPACE=/github/workspace/
 
@@ -64,6 +65,7 @@ function buildFirmware {
   then
     BUILD_ENV=$1
     greenPrint "Building firmware in ${BUILD_ENV} environment..."
+    cd $ZEPHYR_WORKDIR
     west build ./app -- -DBUILD_ENV=${BUILD_ENV} || exitError "ERROR: Unable to build the firmware."
   else
     exitError "ERROR: ${BUILD_ENV} is not a supported build environment."
