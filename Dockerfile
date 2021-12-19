@@ -9,7 +9,7 @@ ENV ZEPHYR_WORKDIR=zephyr-project
 # Setup zephyr workspace
 RUN west init /$ZEPHYR_WORKDIR
 RUN cd /$ZEPHYR_WORKDIR && west update && west zephyr-export
-RUN cp -rf /home/user/.cmake/pakages/Zephyr-sdk /root/.cmake/pakages/Zephyr-sdk
+RUN cp -rf /home/user/.cmake/packages/Zephyr-sdk /root/.cmake/pakages/Zephyr-sdk
 RUN pip3 install --user -r /$ZEPHYR_WORKDIR/zephyr/scripts/requirements.txt
 
 # Overright west config
