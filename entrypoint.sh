@@ -99,8 +99,6 @@ export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 
 # Setup the workspace
 greenPrint "Setting up the Zephyr workspace..."
-whoami
-echo $ZEPHYR_BASE
 setupWorkspace || exitError "ERROR: Unable to setup the Zephyr workspace."
 greenPrint "Zephyr workspace setup DONE!"
 
@@ -157,6 +155,8 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
+  cd $ZEPHYR_WORKDIR
+  echo $PWD
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
