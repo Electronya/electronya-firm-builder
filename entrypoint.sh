@@ -54,7 +54,6 @@ function validateBuildMode {
 
 function setupWorkspace {
   greenPrint "Copying source code..."
-  ls $GITHUB_WORKSPACE
   cp -r $GITHUB_WORKSPACE $APP_DIR
   greenPrint "Updating the workspace..."
   cd $ZEPHYR_WORKDIR
@@ -90,6 +89,9 @@ if [ -z "$BUILD_MODE" ]
 then
   exitError "ERROR: No build mode have been provided."
 fi
+
+# checking user
+who
 
 # Validate build mode
 validateBuildMode
@@ -156,7 +158,6 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  ls $APP_DIR
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
