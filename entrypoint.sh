@@ -54,6 +54,7 @@ function validateBuildMode {
 
 function setupWorkspace {
   greenPrint "Copying source code..."
+  ls $GITHUB_WORKSPACE
   cp -r $GITHUB_WORKSPACE $APP_DIR
   greenPrint "Updating the workspace..."
   cd $ZEPHYR_WORKDIR
@@ -67,6 +68,7 @@ function buildFirmware {
     BUILD_ENV=$1
     greenPrint "Building firmware in ${BUILD_ENV} environment..."
     cd $ZEPHYR_WORKDIR
+    ls $APP_DIR
     west build ./app -- -DBUILD_ENV=${BUILD_ENV} || exitError "ERROR: Unable to build the firmware."
   else
     exitError "ERROR: ${BUILD_ENV} is not a supported build environment."
