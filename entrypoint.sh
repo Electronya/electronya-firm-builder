@@ -68,7 +68,6 @@ function buildFirmware {
     BUILD_ENV=$1
     greenPrint "Building firmware in ${BUILD_ENV} environment..."
     cd $ZEPHYR_WORKDIR
-    ls $APP_DIR
     west build ./app -- -DBUILD_ENV=${BUILD_ENV} || exitError "ERROR: Unable to build the firmware."
   else
     exitError "ERROR: ${BUILD_ENV} is not a supported build environment."
@@ -157,6 +156,7 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
+  ls $APP_DIR
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
