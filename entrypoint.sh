@@ -157,6 +157,8 @@ then
   greenPrint "Running the firmware tests..."
   cd $ZEPHYR_WORKDIR
   echo $PWD
+  ls .
+  cat ./app/west.yml
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
