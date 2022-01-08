@@ -90,9 +90,6 @@ then
   exitError "ERROR: No build mode have been provided."
 fi
 
-# checking user
-who
-
 # Validate build mode
 validateBuildMode
 
@@ -102,6 +99,8 @@ export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 
 # Setup the workspace
 greenPrint "Setting up the Zephyr workspace..."
+whoami
+echo $ZEPHYR_BASE
 setupWorkspace || exitError "ERROR: Unable to setup the Zephyr workspace."
 greenPrint "Zephyr workspace setup DONE!"
 
