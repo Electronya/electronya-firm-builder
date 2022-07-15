@@ -159,6 +159,7 @@ then
   echo $PWD
   ls .
   cat ./app/west.yml
+  ls ./app
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
