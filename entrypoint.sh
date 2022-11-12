@@ -94,7 +94,7 @@ fi
 validateBuildMode
 
 # Export variables
-# export ZEPHYR_BASE=/zephyr-project/zephyr
+export ZEPHYR_BASE=/zephyr-project/zephyr
 export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 
 # Setup the workspace
@@ -155,11 +155,9 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  cd $ZEPHYR_WORKDIR
-  echo $PWD
-  ls .
-  cat ./app/west.yml
-  ls ./app/
+  ls /opt/toolchains
+  echo $ZEPHYR_BASE
+  echo $ZEPHYR_TOOLCHAIN_VARIANT
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
