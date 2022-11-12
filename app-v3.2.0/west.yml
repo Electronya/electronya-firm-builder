@@ -1,0 +1,18 @@
+# Basic Firmware Manifest
+manifest:
+  remotes:
+    - name: electronya
+      url-base: git@github.com:Electronya
+    - name: zephyr
+      url-base: https://github.com/zephyrproject-rtos
+
+  self:
+    path: app
+
+  projects:
+    - name: zephyr
+      remote: zephyr
+      repo-path: zephyr.git
+      path: zephyr
+      revision: zephyr-v3.2.0
+      import: true
