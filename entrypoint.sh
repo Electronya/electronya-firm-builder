@@ -94,8 +94,7 @@ fi
 validateBuildMode
 
 # Export variables
-export ZEPHYR_BASE=/zephyr-project/zephyr
-export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+source $ZEPHYR_WORKDIR/zephyr/zephyr-env.sh
 
 # Setup the workspace
 greenPrint "Setting up the Zephyr workspace..."
