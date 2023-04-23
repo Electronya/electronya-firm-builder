@@ -21,5 +21,5 @@ WORKDIR /zephyr-project
 
 # Setup entrypoint
 COPY entrypoint.sh /zephyr-project/entrypoint.sh
-ENTRYPOINT [ "/zephyr-project/entrypoint.sh" ]
-CMD ["prod"]
+ENTRYPOINT [ "echo ${CMAKE_PREFIX_PATH} && echo ${Zephyr-sdk_DIR}" ]
+# CMD ["prod"]
