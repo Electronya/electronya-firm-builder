@@ -21,5 +21,5 @@ WORKDIR /zephyr-project
 
 # Setup entrypoint
 COPY entrypoint.sh /zephyr-project/entrypoint.sh
-ENTRYPOINT [ "find / -iname zephyr-sdk" ]
-# CMD ["prod"]
+ENTRYPOINT [ "/zephyr-project/entrypoint.sh" ]
+CMD ["prod"]
