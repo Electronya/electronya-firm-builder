@@ -17,9 +17,9 @@ RUN cd /zephyr-project && west update
 RUN rm -rf /zephyr-project/app/west.yml
 
 # Setting working directory
-WORKDIR /zephyr-project
+WORKDIR /zephyr-project/app
 
 # Setup entrypoint
 COPY entrypoint.sh /zephyr-project/entrypoint.sh
-ENTRYPOINT ["find", "/ -iname zephyr-sdk*"]
-# CMD ["prod"]
+ENTRYPOINT [ "/zephyr-project/entrypoint.sh" ]
+CMD ["prod"]
