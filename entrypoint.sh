@@ -96,7 +96,7 @@ validateBuildMode
 # Export variables
 source $ZEPHYR_WORKDIR/zephyr/zephyr-env.sh
 
-echo $(who)
+whoami
 
 # Setup the workspace
 # greenPrint "Setting up the Zephyr workspace..."
