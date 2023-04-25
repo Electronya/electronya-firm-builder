@@ -14,7 +14,7 @@ COPY .west/* /zephyr-project/.west/
 RUN echo "caching zephyr v${ZEPHYR_CACHE}"
 ADD app-v${ZEPHYR_CACHE} /zephyr-project/app
 RUN cd /zephyr-project && west update
-RUN rm -rf /zephyr-project/app/west.yml
+RUN rm -rf /zephyr-project/app
 
 # Setting working directory
 WORKDIR /zephyr-project
