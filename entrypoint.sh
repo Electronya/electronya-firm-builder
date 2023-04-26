@@ -157,7 +157,7 @@ if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
   echo $CMAKE_PREFIX_PATH
-  echo $Zephyr-sdk_DIR
+  echo $ZEPHYR_SDK_DIR
   ls /root/.cmake/packages
   zephyr/scripts/twister -T app/
   testResut=$?
