@@ -156,8 +156,9 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  echo $PWD
-  whoami
+  echo $CMAKE_PREFIX_PATH
+  echo $Zephyr-sdk_DIR
+  ls /root/.cmake/packages
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
