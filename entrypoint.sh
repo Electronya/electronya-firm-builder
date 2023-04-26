@@ -96,74 +96,76 @@ validateBuildMode
 # Export variables
 source $ZEPHYR_WORKDIR/zephyr/zephyr-env.sh
 
-ls
+echo $PWD
 
 # Setup the workspace
-# greenPrint "Setting up the Zephyr workspace..."
-# setupWorkspace || exitError "ERROR: Unable to setup the Zephyr workspace."
-# greenPrint "Zephyr workspace setup DONE!"
+greenPrint "Setting up the Zephyr workspace..."
+setupWorkspace || exitError "ERROR: Unable to setup the Zephyr workspace."
+greenPrint "Zephyr workspace setup DONE!"
 
-# # Launch configuration tool if mode is config
-# if [[ $BUILD_MODE =~ ^($CONFIG_MODE)$ ]]
-# then
-#   buildFirmware ${PROD_MODE}
-#   greenPrint "Configuring the firmware..."
-#   west build -t menuconfig || exitError "ERROR: Unable to configure the firmware."
-#   greenPrint "Firmation configuration DONE!"
-#   # TODO: Move and rename defconfig??
-# fi
+# Launch configuration tool if mode is config
+if [[ $BUILD_MODE =~ ^($CONFIG_MODE)$ ]]
+then
+  buildFirmware ${PROD_MODE}
+  greenPrint "Configuring the firmware..."
+  west build -t menuconfig || exitError "ERROR: Unable to configure the firmware."
+  greenPrint "Firmation configuration DONE!"
+  # TODO: Move and rename defconfig??
+fi
 
-# # Build the firmware in release mode
-# if [[ $BUILD_MODE =~ ^($PROD_MODE)$ ]]
-# then
-#   greenPrint "Building the firmware in ${BUILD_MODE} mode..."
-#   buildFirmware ${BUILD_MODE}
-#   greenPrint "Firmware build DONE!"
-#   greenPrint "Moving build artefacts..."
-#   moveBuildArtefacts || exitError "ERROR: Unable to move build artefacts."
-#   greenPrint "Build artefacts move DONE!!"
-# fi
+# Build the firmware in release mode
+if [[ $BUILD_MODE =~ ^($PROD_MODE)$ ]]
+then
+  greenPrint "Building the firmware in ${BUILD_MODE} mode..."
+  buildFirmware ${BUILD_MODE}
+  greenPrint "Firmware build DONE!"
+  greenPrint "Moving build artefacts..."
+  moveBuildArtefacts || exitError "ERROR: Unable to move build artefacts."
+  greenPrint "Build artefacts move DONE!!"
+fi
 
-# # Build the firmware in development/debug mode
-# if [[ $BUILD_MODE =~ ^($DEV_MODE|$DEBUG_MODE)$ ]]
-# then
-#   greenPrint "Building the firmware in ${BUILD_MODE} mode..."
-#   buildFirmware ${DEV_MODE}
-#   greenPrint "Firmware build DONE!"
-#   if [[ $BUILD_MODE =~ ^($DEBUG_MODE)$ ]]
-#   then
-#     greenPrint "Debugging the firmware..."
-#     west debug || exitError "ERROR: Unable to debug firmware."
-#     greenPrint "Firmware debug DONE!!"
-#   else
-#     greenPrint "Flashing target..."
-#     west flash || exitError "ERROR: Unable to flash the target."
-#     greenPrint "Target flash DONE!!"
-#   fi
-# fi
+# Build the firmware in development/debug mode
+if [[ $BUILD_MODE =~ ^($DEV_MODE|$DEBUG_MODE)$ ]]
+then
+  greenPrint "Building the firmware in ${BUILD_MODE} mode..."
+  buildFirmware ${DEV_MODE}
+  greenPrint "Firmware build DONE!"
+  if [[ $BUILD_MODE =~ ^($DEBUG_MODE)$ ]]
+  then
+    greenPrint "Debugging the firmware..."
+    west debug || exitError "ERROR: Unable to debug firmware."
+    greenPrint "Firmware debug DONE!!"
+  else
+    greenPrint "Flashing target..."
+    west flash || exitError "ERROR: Unable to flash the target."
+    greenPrint "Target flash DONE!!"
+  fi
+fi
 
-# # Run the firmware if mode is qemu
-# if [[ $BUILD_MODE =~ ^($QEMU_MODE)$ ]]
-# then
-#   buildFirmware ${BUILD_MODE}
-#   greenPrint "Running the firmware in ${BUILD_MODE} mode..."
-#   west build -t run || exitError "ERROR: Unable to run the firmware."
-#   greenPrint "Firmware run DONE!!"
-# fi
+# Run the firmware if mode is qemu
+if [[ $BUILD_MODE =~ ^($QEMU_MODE)$ ]]
+then
+  buildFirmware ${BUILD_MODE}
+  greenPrint "Running the firmware in ${BUILD_MODE} mode..."
+  west build -t run || exitError "ERROR: Unable to run the firmware."
+  greenPrint "Firmware run DONE!!"
+fi
 
-# # Run the test cases
-# # TODO: setup coverage
-# if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
-# then
-#   greenPrint "Running the firmware tests..."
-#   zephyr/scripts/twister -T app/
-#   testResut=$?
-#   greenPrint "Moving test artefacts..."
-#   moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
-#   greenPrint "Test artefacts move DONE!!"
-#   if [ $testResut -ne 0 ]
-#   then
-#     exitError "ERROR: Unable to test the firmware."
-#   fi
-#   greenPrint "Firmware tests DONE!!"
-# fi
+# Run the test cases
+# TODO: setup coverage
+if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
+then
+  greenPrint "Running the firmware tests..."
+  echo $PWD
+  whoami
+  zephyr/scripts/twister -T app/
+  testResut=$?
+  greenPrint "Moving test artefacts..."
+  moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
+  greenPrint "Test artefacts move DONE!!"
+  if [ $testResut -ne 0 ]
+  then
+    exitError "ERROR: Unable to test the firmware."
+  fi
+  greenPrint "Firmware tests DONE!!"
+fi
