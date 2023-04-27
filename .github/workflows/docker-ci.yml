@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        zephyr: [3.3.0]
+        zephyr: [3.2.0]
     steps:
     - uses: actions/checkout@v3
     - name: Docker login
