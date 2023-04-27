@@ -96,8 +96,6 @@ validateBuildMode
 # Export variables
 source $ZEPHYR_WORKDIR/zephyr/zephyr-env.sh
 
-echo $PWD
-
 # Setup the workspace
 greenPrint "Setting up the Zephyr workspace..."
 setupWorkspace || exitError "ERROR: Unable to setup the Zephyr workspace."
@@ -156,9 +154,6 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  echo $CMAKE_PREFIX_PATH
-  echo $ZEPHYR_SDK_DIR
-  ls /root/.cmake/packages
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
