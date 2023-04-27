@@ -154,6 +154,7 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
+  echo $ZEPHYR_BASE
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
