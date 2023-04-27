@@ -154,7 +154,7 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  echo $ZEPHYR_BASE
+  echo $CMAKE_MODULE_PATH
   zephyr/scripts/twister -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
