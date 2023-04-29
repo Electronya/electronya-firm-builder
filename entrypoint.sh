@@ -154,7 +154,7 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  zephyr/scripts/twister --coverage -T app/
+  zephyr/scripts/twister --coverage -p qemu_cortex_m3 -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
   moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
