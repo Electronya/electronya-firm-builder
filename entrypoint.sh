@@ -154,7 +154,7 @@ fi
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
-  zephyr/scripts/twister --coverage -p unit_testing -T app/
+  zephyr/scripts/twister -p unit_testing -T app/ -C
   testResut=$?
   greenPrint "Moving test artefacts..."
   moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
