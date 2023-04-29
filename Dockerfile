@@ -3,6 +3,9 @@ FROM zephyrprojectrtos/ci:latest
 # Arguments
 ARG ZEPHYR_CACHE=2.7.0
 
+#install nano
+RUN apt update && apt install nano
+
 # Setup zephyr workspace
 RUN west init /zephyr-project
 RUN cd /zephyr-project && west update && west zephyr-export
