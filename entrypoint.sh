@@ -8,6 +8,7 @@ DEV_MODE="dev"
 DEBUG_MODE="debug"
 QEMU_MODE="qemu"
 TEST_MODE="test"
+COV_MODE="cov"
 
 ZEPHYR_WORKDIR=/zephyr-project
 APP_DIR=$ZEPHYR_WORKDIR/app
@@ -46,7 +47,7 @@ function exitError {
 }
 
 function validateBuildMode {
-  if [[ ! $BUILD_MODE =~ ^($PROD_MODE|$DEV_MODE|$DEBUG_MODE|$QEMU_MODE|$TEST_MODE|$CONFIG_MODE)$ ]]
+  if [[ ! $BUILD_MODE =~ ^($PROD_MODE|$DEV_MODE|$DEBUG_MODE|$QEMU_MODE|$TEST_MODE|$CONFIG_MODE|$COV_MODE)$ ]]
   then
     exitError "ERROR: ${BUILD_MODE} is not a supported build mode."
   fi
@@ -150,11 +151,26 @@ then
 fi
 
 # Run the test cases
-# TODO: setup coverage
 if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
 then
   greenPrint "Running the firmware tests..."
   zephyr/scripts/twister -T app/
+  testResut=$?
+  greenPrint "Moving test artefacts..."
+  moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
+  greenPrint "Test artefacts move DONE!!"
+  if [ $testResut -ne 0 ]
+  then
+    exitError "ERROR: Unable to test the firmware."
+  fi
+  greenPrint "Firmware tests DONE!!"
+fi
+
+# Run the test cases with coverage
+if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
+then
+  greenPrint "Running the firmware tests and coverage..."
+  zephyr/scripts/twister -p native_posix -C -T app/
   testResut=$?
   greenPrint "Moving test artefacts..."
   moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
