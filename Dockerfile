@@ -11,6 +11,7 @@ RUN west init /zephyr-project
 RUN cd /zephyr-project && west update && west zephyr-export
 RUN cp -r /home/user/.cmake/packages/Zephyr-sdk /root/.cmake/packages/
 RUN pip3 install --user -r /zephyr-project/zephyr/scripts/requirements.txt
+RUN source /zephyr-project/zephyr/zephyr-env.sh
 
 # Overright west config
 COPY .west/* /zephyr-project/.west/
