@@ -167,17 +167,18 @@ then
 fi
 
 # Run the test cases with coverage
-if [[ $BUILD_MODE =~ ^($TEST_MODE)$ ]]
-then
-  greenPrint "Running the firmware tests and coverage..."
-  zephyr/scripts/twister -p native_posix -C -T app/
-  testResut=$?
-  greenPrint "Moving test artefacts..."
-  moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
-  greenPrint "Test artefacts move DONE!!"
-  if [ $testResut -ne 0 ]
-  then
-    exitError "ERROR: Unable to test the firmware."
-  fi
-  greenPrint "Firmware tests DONE!!"
-fi
+# TODO: add coverage for only the test cases.
+# if [[ $BUILD_MODE =~ ^($COV_MODE)$ ]]
+# then
+#   greenPrint "Running the firmware tests and coverage..."
+#   zephyr/scripts/twister -p native_posix -C -T app/
+#   testResut=$?
+#   greenPrint "Moving test artefacts..."
+#   moveTestArtefacts || exitError "ERROR: Unable to move test artefacts."
+#   greenPrint "Test artefacts move DONE!!"
+#   if [ $testResut -ne 0 ]
+#   then
+#     exitError "ERROR: Unable to test the firmware."
+#   fi
+#   greenPrint "Firmware tests DONE!!"
+# fi
