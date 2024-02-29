@@ -14,5 +14,5 @@ manifest:
       remote: zephyr
       repo-path: zephyr.git
       path: zephyr
-      revision: zephyr-v3.2.0
+      revision: v3.2.0
       import: true
