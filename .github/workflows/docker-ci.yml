@@ -13,6 +13,8 @@ jobs:
       matrix:
         zephyr: [2.7.0, 2.7.1, 2.7.3, 3.2.0, 3.3.0, 3.4.0, 3.5.0, 3.6.0]
     steps:
+    - name: Delete huge unnecessary tools folder
+      run: rm -rf /opt/hostedtoolcache
     - uses: actions/checkout@v3
     - name: Docker login
       run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
