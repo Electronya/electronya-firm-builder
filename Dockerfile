@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 # Arguments
 ARG ZEPHYR_CACHE=2.7.0
