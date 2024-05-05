@@ -40,7 +40,7 @@ RUN cd / && wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/
 RUN wget -O - https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.5/sha256.sum | shasum --check --ignore-missing
 RUN tar xvf zephyr-sdk-0.16.5_linux-x86_64.tar.xz -C /opt/
 RUN cd /opt/zephyr-sdk-0.16.5 && ./setup.sh -t x86_64-zephyr-elf -c -h
-RUN cp ./sysroots/x86_64-pokysdk-linux/usr/share/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+# RUN cp ./sysroots/x86_64-pokysdk-linux/usr/share/openocd/contrib/60-openocd.rules /etc/udev/rules.d
 # RUN udevadm control --reload
 RUN cd / && rm zephyr-sdk-0.16.5_linux-x86_64.tar.xz
 
